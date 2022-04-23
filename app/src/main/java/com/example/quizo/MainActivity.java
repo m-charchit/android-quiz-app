@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -66,9 +68,13 @@ public class MainActivity extends AppCompatActivity {
                 thread.start();
                 thread.join();
                 String objString = nt.getValue();
-                Intent intent = new Intent(MainActivity.this,MainActivity2.class);
+                if (new JSONObject(objString).getInt("response_code") == 1){
+                    Toast.makeText(MainActivity.this, "Could not find enough questions. Try choosing \"any difficulty\"", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(MainActivity.this,MainActivity2.class);
                 intent.putExtra(EXTRA_JSON_STR,objString);
                 startActivity(intent);
+                }
               } catch (Exception e) {
                   e.printStackTrace();
               }

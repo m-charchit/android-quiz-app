@@ -49,6 +49,7 @@ public class QuizComplete extends AppCompatActivity {
                         handler.addPlayer(new Player(playerName, Integer.parseInt(score)));
                         list.add(new String[]{playerName, score});
                         ad.notifyItemInserted(list.size() - 1);
+                        Toast.makeText(QuizComplete.this, "Score saved.", Toast.LENGTH_SHORT).show();
                         nameAdded = true;
                     }
                     else if (playerName.length()<3){
